@@ -12,7 +12,7 @@ import org.springframework.test.web.servlet.get
 
 
 @WebMvcTest(LibraryAPI::class)
-class LibraryAPITest{
+class LibraryAPITest {
 
     @MockkBean
     private lateinit var libraryService: LibraryService
@@ -21,18 +21,19 @@ class LibraryAPITest{
     private lateinit var mockMvc: MockMvc
 
     @BeforeEach
-    fun init(){
+    fun init() {
         every { libraryService.root() } returns "Hello World!"
     }
+
     @Test
     fun root_gives_right_response() {
         mockMvc.get("/api/library/")
                 .andExpect {
-            status { isOk() }
-            content {
-                contentTypeCompatibleWith("text/plain")
-                string("Hello World!")
-            }
-        }
+                    status { isOk() }
+                    content {
+                        contentTypeCompatibleWith("text/plain")
+                        string("Hello World!")
+                    }
+                }
     }
 }

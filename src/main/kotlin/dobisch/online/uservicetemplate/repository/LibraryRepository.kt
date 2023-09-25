@@ -4,6 +4,4 @@ import dobisch.online.uservicetemplate.data.Library
 import org.springframework.data.repository.CrudRepository
 
 
-interface LibraryRepository: CrudRepository<Library, Long> {
-
-}
+interface LibraryRepository : CrudRepository<Library, Long>

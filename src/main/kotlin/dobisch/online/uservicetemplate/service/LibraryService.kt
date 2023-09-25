@@ -5,7 +5,7 @@ import dobisch.online.uservicetemplate.repository.LibraryRepository
 import org.springframework.stereotype.Service
 
 @Service
-class LibraryService(val libraryRepository: LibraryRepository){
+class LibraryService(val libraryRepository: LibraryRepository) {
     fun root(): String {
         return "Hello World!"
     }

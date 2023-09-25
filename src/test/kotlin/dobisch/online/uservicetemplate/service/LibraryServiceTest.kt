@@ -6,17 +6,18 @@ import dobisch.online.uservicetemplate.data.Library
 import dobisch.online.uservicetemplate.repository.LibraryRepository
 import io.mockk.every
 import io.mockk.mockk
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
-class LibraryServiceTest{
+class LibraryServiceTest {
     val libraryRepository: LibraryRepository = mockk()
     val libraryService = LibraryService(libraryRepository)
 
     @Test
-    fun libraryService_saves_library_successfully(){
-        val reference = Library(null, Address(null),"TestLibrary",3.0f, null)
-        every { libraryRepository.save(reference) } returns Library(1, Address(1),"TestLibrary",3.0f, listOf(Bookshelf(1, null)))
+    fun libraryService_saves_library_successfully() {
+        val reference = Library(null, Address(null), "TestLibrary", 3.0f, listOf(Bookshelf(1, listOf())))
+        every { libraryRepository.save(reference) } returns Library(1, Address(1), "TestLibrary", 3.0f, listOf(Bookshelf(1, listOf())))
         val result = libraryService.saveLibrary(reference)
 
         assertEquals(1, result.id)
@@ -25,6 +26,6 @@ class LibraryServiceTest{
         assertEquals("TestLibrary", result.name)
         assertEquals(3.0f, result.rating)
         assertNotNull(result.bookshelfs)
-        assertEquals(1, result.bookshelfs!!.get(0).id)
+        assertEquals(1, result.bookshelfs[0].id)
     }
 }
