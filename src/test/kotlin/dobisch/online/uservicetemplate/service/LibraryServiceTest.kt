@@ -28,4 +28,9 @@ class LibraryServiceTest {
         assertNotNull(result.bookshelfs)
         assertEquals(1, result.bookshelfs[0].id)
     }
+
+    @Test
+    fun libraryService_root(){
+        assertEquals("Hello World!", libraryService.root())
+    }
 }
