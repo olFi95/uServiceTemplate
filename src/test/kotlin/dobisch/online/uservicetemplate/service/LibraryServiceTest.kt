@@ -15,8 +15,8 @@ class LibraryServiceTest{
 
     @Test
     fun libraryService_saves_library_successfully(){
-        val reference = Library(null, Address(null),"TestLibrary",3.0f, Bookshelf(null))
-        every { libraryRepository.save(reference) } returns Library(1, Address(1),"TestLibrary",3.0f, Bookshelf(1))
+        val reference = Library(null, Address(null),"TestLibrary",3.0f, null)
+        every { libraryRepository.save(reference) } returns Library(1, Address(1),"TestLibrary",3.0f, listOf(Bookshelf(1, null)))
         val result = libraryService.saveLibrary(reference)
 
         assertEquals(1, result.id)
@@ -25,6 +25,6 @@ class LibraryServiceTest{
         assertEquals("TestLibrary", result.name)
         assertEquals(3.0f, result.rating)
         assertNotNull(result.bookshelfs)
-        assertEquals(1, result.bookshelfs.id)
+        assertEquals(1, result.bookshelfs!!.get(0).id)
     }
 }
